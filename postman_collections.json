@@ -1,0 +1,40 @@
+{
+    "info": {
+        "name": "RBAC Project",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Register User",
+            "request": {
+                "method": "POST",
+                "url": "http://localhost:3000/auth/register",
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"username\": \"testuser\", \"password\": \"password123\"}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Login",
+            "request": {
+                "method": "POST",
+                "url": "http://localhost:3000/auth/login",
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"username\": \"testuser\", \"password\": \"password123\"}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

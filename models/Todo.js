@@ -6,7 +6,7 @@ const Todo = sequelize.define('Todo', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    completed:
+    userId:
     {
         type: DataTypes.BOOLEAN,
         defaultValue: false

@@ -1,22 +1,19 @@
-require('dotenv').config();
 const express = require('express');
-const sequelize = require('./db');
-const authRoutes = require('./routes/auth.routes');
-const rbacRoutes = require('./routes/rbac.routes');
-const todoRoutes = require('./routes/todo.routes');
+const authRoutes = require('./auth');
+const rbacRoutes = require('./routes/rbac');
+const shoppingRoutes = require('./routes/shopping');
+const todoRoutes = require('./routes/todo');
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
-app.use('/api', authRoutes)
-app.use('/api', rbacRoutes)
-app.use('/api', todoRoutes)
+app.use('/auth', authRoutes);
+app.use('/rbac', rbacRoutes);
+app.use('/shopping', shoppingRoutes);
+app.use('/todo', todoRoutes);
 
 const PORT = process.env.PORT || 3000;
-
-sequelize.sync({ alter: true }).then(() => {
-    console.log('Database connected successfully');
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
-})
+app.listen(PORT, () => {
+    console.log(`Server running on port https://localhost:${PORT}`);
+});
