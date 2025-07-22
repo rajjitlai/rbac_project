@@ -12,17 +12,23 @@ const checkPermission = (permissionName) => {
             const token = authHeader.split(' ')[1];
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-            const user = await User.findByPk(decoded.userId, {
+            const user = await User.findByPk(decoded.id, {
                 include: {
                     model: Role,
-                    include: [Permission],
+                    as: 'roles',
+                    through: [
+                        {
+                            model: Permission,
+                            as: 'permissions'
+                        }
+                    ],
                 },
             });
 
             if (!user) return res.status(404).json({ message: 'User not found' });
 
-            const permissions = user.Roles.flatMap(role =>
-                role.Permissions.map(p => p.name)
+            const permissions = (user.roles || []).flatMap(role =>
+                (role.permissions || []).map(p => p.name)
             );
 
             if (!permissions.includes(permissionName)) {

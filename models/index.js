@@ -12,11 +12,11 @@ const Role = require('./Role');
 const Permission = require('./Permission');
 const Todo = require('./Todo');
 
-User.belongsToMany(Role, { through: 'UserRoles' });
-Role.belongsToMany(User, { through: 'UserRoles' });
+User.belongsToMany(Role, { through: 'UserRoles', as: 'roles' });
+Role.belongsToMany(User, { through: 'UserRoles', as: 'users' });
 
-Role.belongsToMany(Permission, { through: 'RolePermissions' });
-Permission.belongsToMany(Role, { through: 'RolePermissions' });
+Role.belongsToMany(Permission, { through: 'RolePermissions', as: 'permissions' });
+Permission.belongsToMany(Role, { through: 'RolePermissions', as: 'roles' });
 
 Todo.belongsTo(User);
 User.hasMany(Todo);

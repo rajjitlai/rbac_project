@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
-const User = require('./User');
 
 const Todo = sequelize.define('Todo', {
     title: {
@@ -13,8 +12,5 @@ const Todo = sequelize.define('Todo', {
         defaultValue: false
     }
 })
-
-Todo.belongsTo(User);
-User.hasMany(Todo);
 
 module.exports = Todo;

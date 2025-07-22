@@ -14,7 +14,7 @@ app.use('/api', todoRoutes)
 
 const PORT = process.env.PORT || 3000;
 
-sequelize.sync({alter: true}).then(() => {
+sequelize.sync({ alter: true }).then(() => {
     console.log('Database connected successfully');
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
