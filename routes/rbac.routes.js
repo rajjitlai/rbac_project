@@ -1,5 +1,5 @@
 const express = require('express');
-const { User, Role, Permission } = require('../models/associates')
+const { User, Role, Permission } = require('../models')
 
 const router = express.Router();
 

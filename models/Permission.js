@@ -1,5 +1,5 @@
 const {DataTypes} = require('sequelize');
-const sequelize = require('./index');
+const sequelize = require('../db');
 
 const Permission = sequelize.define('Permission', {
     name:{
