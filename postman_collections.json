@@ -1,40 +1,837 @@
 {
     "info": {
-        "name": "RBAC Project",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+        "name": "Dynamic RBAC System with Multi-App Integration",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_postman_id": "a1b2c3d4-e5f6-4g7h-8i9j-0k1l2m3n4o5p",
+        "description": "Collection for testing the RBAC system with Shopping and Todo apps",
+        "version": "1.0.0"
     },
     "item": [
         {
-            "name": "Register User",
+            "name": "Authentication - Register",
             "request": {
                 "method": "POST",
-                "url": "http://localhost:3000/auth/register",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/auth/register",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "auth",
+                        "register"
+                    ]
+                },
                 "body": {
                     "mode": "raw",
-                    "raw": "{\"username\": \"testuser\", \"password\": \"password123\"}",
-                    "options": {
-                        "raw": {
-                            "language": "json"
-                        }
-                    }
+                    "raw": "{\"username\":\"testuser\",\"password\":\"password123\"}"
                 }
-            }
+            },
+            "response": []
         },
         {
-            "name": "Login",
+            "name": "Authentication - Login",
             "request": {
                 "method": "POST",
-                "url": "http://localhost:3000/auth/login",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/auth/login",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "auth",
+                        "login"
+                    ]
+                },
                 "body": {
                     "mode": "raw",
-                    "raw": "{\"username\": \"testuser\", \"password\": \"password123\"}",
-                    "options": {
-                        "raw": {
-                            "language": "json"
-                        }
+                    "raw": "{\"username\":\"testuser\",\"password\":\"password123\"}"
+                },
+                "response": []
+            },
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "const response = pm.response.json();",
+                            "pm.environment.set('token', response.token);"
+                        ]
                     }
                 }
-            }
+            ]
+        },
+        {
+            "name": "RBAC - Create Role",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/roles",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "roles"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"name\":\"admin\"}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Create Todo Read Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/permissions",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "permissions"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"name\":\"todo:read\"}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Create Todo Create Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/permissions",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "permissions"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"name\":\"todo:create\"}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Create Todo Update Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/permissions",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "permissions"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"name\":\"todo:update\"}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Create Todo Delete Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/permissions",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "permissions"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"name\":\"todo:delete\"}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Create Product Create Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/permissions",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "permissions"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"name\":\"product:create\"}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Create Cart Modify Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/permissions",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "permissions"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"name\":\"cart:modify\"}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Create Checkout Perform Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/permissions",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "permissions"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"name\":\"checkout:perform\"}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Assign Role to User",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/assign-role",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "assign-role"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"userId\":1,\"roleId\":1}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Assign Todo Read Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/assign-permission",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "assign-permission"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"roleId\":1,\"permissionId\":1}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Assign Todo Create Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/assign-permission",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "assign-permission"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"roleId\":1,\"permissionId\":2}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Assign Todo Update Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/assign-permission",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "assign-permission"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"roleId\":1,\"permissionId\":3}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Assign Todo Delete Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/assign-permission",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "assign-permission"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"roleId\":1,\"permissionId\":4}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Assign Product Create Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/assign-permission",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "assign-permission"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"roleId\":1,\"permissionId\":5}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Assign Cart Modify Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/assign-permission",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "assign-permission"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"roleId\":1,\"permissionId\":6}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "RBAC - Assign Checkout Perform Permission",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/rbac/assign-permission",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "rbac",
+                        "assign-permission"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"roleId\":1,\"permissionId\":7}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Shopping - Get Products",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{baseURL}}/shopping/products",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "shopping",
+                        "products"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Shopping - Create Product",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/shopping/products",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "shopping",
+                        "products"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"name\":\"Test Product\"}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Shopping - Modify Cart",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/shopping/cart",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "shopping",
+                        "cart"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"item\":\"Test Item\"}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Shopping - Checkout",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/shopping/checkout",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "shopping",
+                        "checkout"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Todo - Create Todo",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/todo/todos",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "todo",
+                        "todos"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"title\":\"Buy milk\"}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Todo - Get Todos",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/todo/todos",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "todo",
+                        "todos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Todo - Update Todo",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/todo/todos/1",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "todo",
+                        "todos",
+                        "1"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"title\":\"Buy milk and bread\"}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Todo - Delete Todo",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseURL}}/todo/todos/1",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "todo",
+                        "todos",
+                        "1"
+                    ]
+                }
+            },
+            "response": []
         }
     ]
 }

@@ -1,0 +1,594 @@
+{
+	"id": "47afc4b0-c231-499d-a7ca-992f5647618d",
+	"name": "Dynamic RBAC System with Multi-App Integration",
+	"timestamp": "2025-07-22T18:15:06.755Z",
+	"collection_id": "21087608-9a42158d-891e-432b-94cb-efc7ce1bce99",
+	"folder_id": 0,
+	"environment_id": "21087608-9d02a7a5-0bfd-4392-8268-0997d7eeb11a",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-07-22T18:15:05.654Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "451cf64c-400a-407c-89d1-546704ed5b30",
+			"name": "Authentication - Register",
+			"url": "http://localhost:3000/auth/register",
+			"time": 124,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				124
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "2525385e-d816-424a-a9bb-ec5630f14e4a",
+			"name": "Authentication - Login",
+			"url": "http://localhost:3000/auth/login",
+			"time": 71,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				71
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "4c7726e0-fa85-429a-8073-dbe3f3eea037",
+			"name": "RBAC - Create Role",
+			"url": "http://localhost:3000/rbac/roles",
+			"time": 12,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1823ce09-fe9f-40ed-afab-34ffbf17dfab",
+			"name": "RBAC - Create Todo Read Permission",
+			"url": "http://localhost:3000/rbac/permissions",
+			"time": 6,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				6
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5a4ed713-7640-4e61-a2d2-53523384e8d0",
+			"name": "RBAC - Create Todo Create Permission",
+			"url": "http://localhost:3000/rbac/permissions",
+			"time": 6,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				6
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "9b1656c3-3300-41c9-8eda-db431d83b3c6",
+			"name": "RBAC - Create Todo Update Permission",
+			"url": "http://localhost:3000/rbac/permissions",
+			"time": 7,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "343edc3f-58b8-409f-81b6-2cfeae5307bf",
+			"name": "RBAC - Create Todo Delete Permission",
+			"url": "http://localhost:3000/rbac/permissions",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "03f8b51e-18ad-49c5-82b0-9fc13f0dcf38",
+			"name": "RBAC - Create Product Create Permission",
+			"url": "http://localhost:3000/rbac/permissions",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "96e27fe6-9850-45e1-b1ec-09c4a4c88f28",
+			"name": "RBAC - Create Cart Modify Permission",
+			"url": "http://localhost:3000/rbac/permissions",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "2cefe1f0-9afb-420d-a2f8-7f26c690ecae",
+			"name": "RBAC - Create Checkout Perform Permission",
+			"url": "http://localhost:3000/rbac/permissions",
+			"time": 9,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d0a2bed0-c25d-4695-bd6a-376fda114e4e",
+			"name": "RBAC - Assign Role to User",
+			"url": "http://localhost:3000/rbac/assign-role",
+			"time": 30,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				30
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "697f5df0-e64e-43b0-a378-936d1f36022b",
+			"name": "RBAC - Assign Todo Read Permission",
+			"url": "http://localhost:3000/rbac/assign-permission",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				13
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ded3fe9b-ad64-4e96-809b-862a00e7d4a6",
+			"name": "RBAC - Assign Todo Create Permission",
+			"url": "http://localhost:3000/rbac/assign-permission",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				15
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "693cca65-7f0c-4a4a-b54a-9ce56ce89689",
+			"name": "RBAC - Assign Todo Update Permission",
+			"url": "http://localhost:3000/rbac/assign-permission",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d8408621-081b-4a7a-8853-3a8fd7bc8531",
+			"name": "RBAC - Assign Todo Delete Permission",
+			"url": "http://localhost:3000/rbac/assign-permission",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "fdce97f1-af73-45c8-891f-42229e2bc873",
+			"name": "RBAC - Assign Product Create Permission",
+			"url": "http://localhost:3000/rbac/assign-permission",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c4007ed0-c9b5-4c1b-8340-6c1266a9d26f",
+			"name": "RBAC - Assign Cart Modify Permission",
+			"url": "http://localhost:3000/rbac/assign-permission",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b0f0b5b8-0e13-4e1f-892e-0f1007e742f3",
+			"name": "RBAC - Assign Checkout Perform Permission",
+			"url": "http://localhost:3000/rbac/assign-permission",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "aed7b770-defb-4501-ab11-49dad48d21fb",
+			"name": "Shopping - Get Products",
+			"url": "http://localhost:3000/shopping/products",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c53ef934-eea5-4e8f-89ac-bf884a73dc3f",
+			"name": "Shopping - Create Product",
+			"url": "http://localhost:3000/shopping/products",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				13
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "53074056-b4d5-4f87-a518-9b2e917d9d25",
+			"name": "Shopping - Modify Cart",
+			"url": "http://localhost:3000/shopping/cart",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "3313a03f-d700-4ced-9e71-895f48c608f8",
+			"name": "Shopping - Checkout",
+			"url": "http://localhost:3000/shopping/checkout",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "bc87ab2a-d75c-4f69-bf8b-e267d2c747bb",
+			"name": "Todo - Create Todo",
+			"url": "http://localhost:3000/todo/todos",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "95786afa-10cd-4a59-8714-4b79f72294fc",
+			"name": "Todo - Get Todos",
+			"url": "http://localhost:3000/todo/todos",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				6
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b7b3af3a-92d2-4a84-91a1-df54a4f82620",
+			"name": "Todo - Update Todo",
+			"url": "http://localhost:3000/todo/todos/1",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "392ec1bf-431d-42df-bc9d-c1cde932a46e",
+			"name": "Todo - Delete Todo",
+			"url": "http://localhost:3000/todo/todos/1",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 425,
+	"collection": {
+		"requests": [
+			{
+				"id": "451cf64c-400a-407c-89d1-546704ed5b30",
+				"method": "POST"
+			},
+			{
+				"id": "2525385e-d816-424a-a9bb-ec5630f14e4a",
+				"method": "POST"
+			},
+			{
+				"id": "4c7726e0-fa85-429a-8073-dbe3f3eea037",
+				"method": "POST"
+			},
+			{
+				"id": "1823ce09-fe9f-40ed-afab-34ffbf17dfab",
+				"method": "POST"
+			},
+			{
+				"id": "5a4ed713-7640-4e61-a2d2-53523384e8d0",
+				"method": "POST"
+			},
+			{
+				"id": "9b1656c3-3300-41c9-8eda-db431d83b3c6",
+				"method": "POST"
+			},
+			{
+				"id": "343edc3f-58b8-409f-81b6-2cfeae5307bf",
+				"method": "POST"
+			},
+			{
+				"id": "03f8b51e-18ad-49c5-82b0-9fc13f0dcf38",
+				"method": "POST"
+			},
+			{
+				"id": "96e27fe6-9850-45e1-b1ec-09c4a4c88f28",
+				"method": "POST"
+			},
+			{
+				"id": "2cefe1f0-9afb-420d-a2f8-7f26c690ecae",
+				"method": "POST"
+			},
+			{
+				"id": "d0a2bed0-c25d-4695-bd6a-376fda114e4e",
+				"method": "POST"
+			},
+			{
+				"id": "697f5df0-e64e-43b0-a378-936d1f36022b",
+				"method": "POST"
+			},
+			{
+				"id": "ded3fe9b-ad64-4e96-809b-862a00e7d4a6",
+				"method": "POST"
+			},
+			{
+				"id": "693cca65-7f0c-4a4a-b54a-9ce56ce89689",
+				"method": "POST"
+			},
+			{
+				"id": "d8408621-081b-4a7a-8853-3a8fd7bc8531",
+				"method": "POST"
+			},
+			{
+				"id": "fdce97f1-af73-45c8-891f-42229e2bc873",
+				"method": "POST"
+			},
+			{
+				"id": "c4007ed0-c9b5-4c1b-8340-6c1266a9d26f",
+				"method": "POST"
+			},
+			{
+				"id": "b0f0b5b8-0e13-4e1f-892e-0f1007e742f3",
+				"method": "POST"
+			},
+			{
+				"id": "aed7b770-defb-4501-ab11-49dad48d21fb",
+				"method": "GET"
+			},
+			{
+				"id": "c53ef934-eea5-4e8f-89ac-bf884a73dc3f",
+				"method": "POST"
+			},
+			{
+				"id": "53074056-b4d5-4f87-a518-9b2e917d9d25",
+				"method": "POST"
+			},
+			{
+				"id": "3313a03f-d700-4ced-9e71-895f48c608f8",
+				"method": "POST"
+			},
+			{
+				"id": "bc87ab2a-d75c-4f69-bf8b-e267d2c747bb",
+				"method": "POST"
+			},
+			{
+				"id": "95786afa-10cd-4a59-8714-4b79f72294fc",
+				"method": "GET"
+			},
+			{
+				"id": "b7b3af3a-92d2-4a84-91a1-df54a4f82620",
+				"method": "PUT"
+			},
+			{
+				"id": "392ec1bf-431d-42df-bc9d-c1cde932a46e",
+				"method": "DELETE"
+			}
+		]
+	}
+}
