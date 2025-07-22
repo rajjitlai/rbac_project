@@ -9,6 +9,8 @@ router.post('/todos', authMiddleware, rbacMiddleware('todo:create'), (req, res) 
 
 router.get('/todos', authMiddleware, rbacMiddleware('todo:read'), (req, res) => {
     res.json({ message: 'List of todos' });
+    // show the data in json format
+    
 });
 
 router.put('/todos/:id', authMiddleware, rbacMiddleware('todo:update'), (req, res) => {

@@ -6,11 +6,10 @@ const Todo = sequelize.define('Todo', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    userId:
+},
     {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
+        timestamps: true
     }
-})
+)
 
 module.exports = Todo;
