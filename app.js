@@ -5,6 +5,13 @@ const shoppingRoutes = require('./routes/shopping');
 const todoRoutes = require('./routes/todo');
 require('dotenv').config();
 
+// frontend connection
+const cors = require('cors');
+app.use(cors({
+    origin: 'http://localhost:4200',
+    credentials: true
+}))
+
 const app = express();
 app.use(express.json());
 
