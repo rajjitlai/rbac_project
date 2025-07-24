@@ -2,6 +2,27 @@ const express = require('express');
 const { Role, Permission, User } = require('../models');
 const router = express.Router();
 
+/**
+ * @swagger
+ * /roles:
+ *   post:
+ *     summary: Create a new role
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Role created
+ *       400:
+ *         description: Invalid input
+ */
+
 router.post('/roles', async (req, res) => {
     const { name } = req.body;
     try {
@@ -12,6 +33,24 @@ router.post('/roles', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /permissions:
+ *   post:
+ *     summary: Create a new permission
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Permission created
+ */
 router.post('/permissions', async (req, res) => {
     const { name } = req.body;
     try {
@@ -21,6 +60,25 @@ router.post('/permissions', async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
+
+/**
+ * @swagger
+ * /assign-role:
+ *   post:
+ *     summary: Assign a role
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Role assigned
+ */
 
 router.post('/assign-role', async (req, res) => {
     const { userId, roleId } = req.body;
@@ -34,6 +92,25 @@ router.post('/assign-role', async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
+
+/**
+ * @swagger
+ * /assign-permission:
+ *   post:
+ *     summary: Assign permission
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Permission assigned
+ */
 
 router.post('/assign-permission', async (req, res) => {
     const { roleId, permissionId } = req.body;
