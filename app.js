@@ -5,6 +5,9 @@ const shoppingRoutes = require('./routes/shopping');
 const todoRoutes = require('./routes/todo');
 require('dotenv').config();
 
+const app = express();
+app.use(express.json());
+
 // frontend connection
 const cors = require('cors');
 app.use(cors({
@@ -12,8 +15,6 @@ app.use(cors({
     credentials: true
 }))
 
-const app = express();
-app.use(express.json());
 
 app.use('/auth', authRoutes);
 app.use('/rbac', rbacRoutes);
