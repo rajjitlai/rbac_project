@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: process.env.DB || './rbac.sqlite',
+  storage: './db/rbac.sqlite',
   logging: false,
 });
 
