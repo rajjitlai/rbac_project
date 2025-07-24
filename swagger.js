@@ -9,6 +9,15 @@ const options = {
             description: 'API documentation for RBAC, authentication, todo, and shopping apps',
             version: '1.0.0',
         },
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                },
+            }
+        },
         servers: [
             {
                 url: 'http://localhost:3000',

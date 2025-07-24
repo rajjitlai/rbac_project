@@ -7,6 +7,7 @@ const router = express.Router();
  * /roles:
  *   post:
  *     summary: Create a new role
+ *     tags: [RBAC]
  *     requestBody:
  *       required: true
  *       content:
@@ -38,6 +39,7 @@ router.post('/roles', async (req, res) => {
  * /permissions:
  *   post:
  *     summary: Create a new permission
+ *     tags: [RBAC]
  *     requestBody:
  *       required: true
  *       content:
@@ -66,6 +68,7 @@ router.post('/permissions', async (req, res) => {
  * /assign-role:
  *   post:
  *     summary: Assign a role
+ *     tags: [RBAC] 
  *     requestBody:
  *       required: true
  *       content:
@@ -98,6 +101,7 @@ router.post('/assign-role', async (req, res) => {
  * /assign-permission:
  *   post:
  *     summary: Assign permission
+ *     tags: [RBAC]
  *     requestBody:
  *       required: true
  *       content:
