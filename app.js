@@ -11,7 +11,7 @@ app.use(express.json());
 // frontend connection
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://localhost:4200',
+    origin: '*',
     credentials: true
 }))
 
