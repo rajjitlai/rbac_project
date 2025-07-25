@@ -1,84 +1,108 @@
 # Dynamic RBAC System with Multi-App Integration
 
-## Project Overview
+## 📘 Introduction
 
-This project is a **Dynamic Role-Based Access Control (RBAC) System** with authentication and access control capabilities, designed to be reused across two mini-applications:
+This project implements a **Dynamic Role-Based Access Control (RBAC) System** that provides authentication and fine-grained access control. It supports integration with multiple applications—in this case, a **Shopping App** and a **Todo App**—and was developed over a 4-day period as part of a technical assessment.
 
-- **Shopping App**
-- **Todo App**
+---
 
-The system was developed within a 4-day (96-hour) timeframe as part of an interview task. It meets all specified objectives, including user authentication, dynamic role and permission management, and middleware-based access control.
+## 📑 Table of Contents
 
-## Technology Stack
+* [Introduction](#-introduction)
+* [Technology Stack](#-technology-stack)
+* [Features](#-features)
 
-- **Frontend**: React.js with Tailwind CSS, built using Vite
-- **Backend**: Node.js with Express, Sequelize (ORM) with SQLite
-- **Authentication**: JWT-based authentication
-- **Database**: SQLite (managed via Sequelize ORM)
+  * [Authentication](#authentication)
+  * [Role & Permission Management](#role--permission-management)
+  * [Access Control](#access-control)
+  * [Shopping App Endpoints](#shopping-app-endpoints)
+  * [Todo App Endpoints](#todo-app-endpoints)
+  * [Bonus Features](#bonus-features)
+* [Project Structure](#-project-structure)
+* [Setup Instructions](#-setup-instructions)
 
-## Features Implemented
+  * [Backend Setup](#backend-setup)
+  * [Frontend Setup](#frontend-setup)
+  * [Docker Setup (Optional)](#docker-setup-optional)
+* [API Testing](#-api-testing)
+* [Database Schema](#-database-schema)
+* [Evaluation Criteria](#-evaluation-criteria)
+* [Contributors](#-contributors)
+* [License](#-license)
+
+---
+
+## 🛠️ Technology Stack
+
+* **Frontend**: React.js + Tailwind CSS (Vite)
+* **Backend**: Node.js + Express.js
+* **Database**: SQLite (managed via Sequelize ORM)
+* **Authentication**: JSON Web Tokens (JWT)
+
+---
+
+## 🚀 Features
 
 ### Authentication
 
-- **POST /register**: Register new users
-- **POST /login**: Authenticate users and return a JWT token
+* `POST /register`: Register new users.
+* `POST /login`: Authenticate and issue JWT tokens.
 
 ### Role & Permission Management
 
-- **POST /roles**: Create new roles
-- **POST /permissions**: Create new permissions (e.g., `todo:create`, `product:delete`)
-- **POST /assign-role**: Assign a role to a user
-- **POST /assign-permission**: Assign permissions to a role
+* `POST /roles`: Create new roles.
+* `POST /permissions`: Create permissions (e.g., `todo:create`, `product:delete`).
+* `POST /assign-role`: Assign a role to a user.
+* `POST /assign-permission`: Assign permissions to a role.
 
 ### Access Control
 
-- Middleware enforces permissions per endpoint by:
-  - Identifying the user via JWT token
-  - Fetching assigned roles and permissions
-  - Checking if the current action is allowed
+Implemented via Express middleware:
+
+* Decodes JWT to identify user.
+* Fetches assigned roles and permissions.
+* Verifies permission for each route.
 
 ### Shopping App Endpoints
 
-- **GET /products**: Public access
-- **POST /products**: Requires `product:create`
-- **POST /cart**: Requires `cart:modify`
-- **POST /checkout**: Requires `checkout:perform`
+* `GET /products`: Public access.
+* `POST /products`: Requires `product:create`.
+* `POST /cart`: Requires `cart:modify`.
+* `POST /checkout`: Requires `checkout:perform`.
 
 ### Todo App Endpoints
 
-- **POST /todos**: Requires `todo:create`
-- **GET /todos**: Requires `todo:read`
-- **PUT /todos/:id**: Requires `todo:update`
-- **DELETE /todos/:id**: Requires `todo:delete`
+* `POST /todos`: Requires `todo:create`.
+* `GET /todos`: Requires `todo:read`.
+* `PUT /todos/:id`: Requires `todo:update`.
+* `DELETE /todos/:id`: Requires `todo:delete`.
 
 ### Bonus Features
 
-- **Admin Panel/Basic UI**: Implemented using React.js and Tailwind CSS
-- **Swagger/OpenAPI Documentation**: Included (see API testing section)
-- **Docker Support**: Optional setup provided
+* Admin Panel (React + Tailwind CSS)
+* Swagger/OpenAPI documentation
+* Docker support
 
-## Project Structure
+---
+
+## 🧱 Project Structure
 
 ```
 rbac_project/
-|- auth/              # Authentication logic (JWT setup)
-|- models/            # Sequelize models (User, Role, Permission, Todo, Cart, CartItem, Product)
-|- routes/            # API routes for RBAC, Shopping, and Todo apps
-|- middleware/        # Permission enforcement logic
-|- db/                # Database connection and schema (SQLite)
-|- app.js             # Main application file
-|- frontend/          # React.js frontend with Vite and Tailwind CSS
-|- README.md          # This file
-|- postman_collection.json # API testing collection
+├── auth/              # JWT auth logic
+├── models/            # Sequelize models
+├── routes/            # API routes
+├── middleware/        # RBAC enforcement
+├── db/                # SQLite config and setup
+├── app.js             # Main app entry
+├── frontend/          # React frontend (Vite)
+├── postman_collection.json
+└── README.md
 ```
 
-## Setup Instructions
+---
 
-### Prerequisites
-
-- Node.js (v14.x or later)
-- npm or yarn
-- Docker (optional for containerized setup)
+## 🧰 Setup Instructions
 
 ### Backend Setup
 
@@ -95,53 +119,40 @@ rbac_project/
    npm install
    ```
 
-3. **Set Up Database**
-   - Ensure SQLite is installed.
-   - The database schema is managed via Sequelize migrations. Run:
+3. **Run Migrations and Seeders**
 
-     ```bash
-     npx sequelize-cli db:migrate
-     ```
+   ```bash
+   npx sequelize-cli db:migrate
+   npx sequelize-cli db:seed:all
+   ```
 
-   - Seed the database (optional, adjust seeders as needed):
+4. **Environment Setup**
 
-     ```bash
-     npx sequelize-cli db:seed:all
-     ```
+   Create a `.env` file:
 
-4. **Configure Environment**
-   - Create a `.env` file in the root directory with:
+   ```env
+   DB=./db/db_name
+   JWT_SECRET=your-secret-key
+   PORT=3000
+   ```
 
-     ```
-     DB=./db/db_name
-     JWT_SECRET=your-secret-key
-     PORT=3000
-     ```
-
-   - Adjust `JWT_SECRET` to a secure value. (we can get it from <https://jwt.io>)
-
-5. **Run the Backend**
-
-   Before running the backend, it is needed to setup the Database by running
+5. **Initialize and Run Backend**
 
    ```bash
    node ./db/setup.js
-   ```
-
-   Then run the backend:
-
-   ```bash
    npm start
    ```
 
-   The server will run on `http://localhost:3000`.
+   Backend will run at: `http://localhost:3000`
+
+---
 
 ### Frontend Setup
 
 1. **Navigate to Frontend Directory**
 
    ```bash
-   cd rbac_admin
+   cd frontend
    ```
 
 2. **Install Dependencies**
@@ -156,63 +167,72 @@ rbac_project/
    npm run dev
    ```
 
-   The app will be available at `http://localhost:5173` (default Vite port).
+   Access at: `http://localhost:5173`
+
+---
 
 ### Docker Setup (Optional)
 
-1. Build the Docker image:
+1. **Build Docker Image**
 
    ```bash
    docker build -t rbac-system .
    ```
 
-2. Run the container:
+2. **Run Container**
 
    ```bash
    docker run -p 3000:3000 -p 5173:5173 -e JWT_SECRET=your-secret-key rbac-system
    ```
 
-## API Testing
+---
 
-- Use the included `postman_collection.json` file to import into Postman.
-- Alternatively, test with curl commands (examples in the collection).
-- Swagger/OpenAPI documentation is available at `http://localhost:3000/api-docs` when the backend is running.
+## 🧪 API Testing
 
-## Database Schema
+* Import `postman_collection.json` into Postman.
+* Access Swagger docs at: `http://localhost:3000/api-docs`
 
-The schema is defined using Sequelize ORM models:
+---
 
-- **User**: `id`, `username`, `password`
-- **Role**: `id`, `name`
-- **Permission**: `id`, `name`
-- **Todo**: `id`, `title`
-- **Cart**: `id`, `userId`
-- **CartItem**: `id`, `userId`, `productId`, `cartId`
-- **Product**: `id`, `name`
+## 🗃️ Database Schema
 
-Relationships are managed via Sequelize associations (e.g., `belongsTo`, `hasMany`, `belongsToMany`).
+Sequelize Models:
 
-## Evaluation Criteria
+| Model      | Attributes                            |
+| ---------- | ------------------------------------- |
+| User       | `id`, `username`, `password`          |
+| Role       | `id`, `name`                          |
+| Permission | `id`, `name`                          |
+| Todo       | `id`, `title`                         |
+| Cart       | `id`, `userId`                        |
+| CartItem   | `id`, `userId`, `productId`, `cartId` |
+| Product    | `id`, `name`                          |
 
-- **API Functionality**: 30% (Fully implemented)
-- **RBAC Logic & Design**: 25% (Dynamic and reusable)
-- **Code Quality**: 15% (Clean and maintainable)
-- **API Usability/Test**: 15% (Tested with Postman)
-- **Project Structure**: 10% (Follows suggested structure)
-- **Bonus Features**: 5% (UI, Swagger, Docker support)
+Sequelize associations manage relationships like `belongsTo`, `hasMany`, and `belongsToMany`.
 
-## Submission
+---
 
-- **Source Code**: Available in this repository
-- **README**: This file
-- **Database Schema**: Defined in `models/`
-- **Working RBAC Middleware**: In `middleware/`
-- **API Testing File**: `postman_collection.json`
+## 📊 Evaluation Criteria
 
-## Contributors
+| Criteria            | Weight | Status                 |
+| ------------------- | ------ | ---------------------- |
+| API Functionality   | 30%    | ✅ Fully implemented    |
+| RBAC Logic & Design | 25%    | ✅ Dynamic & reusable   |
+| Code Quality        | 15%    | ✅ Clean & maintainable |
+| API Usability       | 15%    | ✅ Postman tested       |
+| Project Structure   | 10%    | ✅ Organized            |
+| Bonus Features      | 5%     | ✅ Included             |
 
-- [Rajjit Laishram](https://github.com/rajjitlai/)
+---
 
-## License
+## 👥 Contributors
 
-MIT License
+* [Rajjit Laishram](https://github.com/rajjitlai/)
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
