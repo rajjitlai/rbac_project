@@ -110,9 +110,17 @@ router.post('/cart', authMiddleware, rbacMiddleware('cart:modify'), async (req, 
         const product = await Product.findByPk(productId);
         if (!product) return res.status(404).json({ error: 'Product not found' });
 
-        const cartItem = await Cart.create({
+        // Find or create the user's cart
+        let cart = await Cart.findOne({ where: { userId: req.user.id } });
+        if (!cart) {
+            cart = await Cart.create({ userId: req.user.id });
+        }
+
+        // Create a CartItem
+        const cartItem = await CartItem.create({
+            userId: req.user.id,
             productId,
-            userId: req.user.id
+            cartId: cart.id
         });
 
         res.json({ message: 'Product added to cart', cartItem });
@@ -170,27 +178,25 @@ router.post('/checkout', authMiddleware, rbacMiddleware('checkout:perform'), asy
  */
 router.get('/cart', authMiddleware, async (req, res) => {
     try {
+        const cart = await Cart.findOne({ where: { userId: req.user.id } });
+        if (!cart) return res.json([]);
+
         const cartItems = await CartItem.findAll({
-            where: { userId: req.user.id },
-            include: [{
-                model: Product,
-                attributes: ['name']
-            }]
+            where: { cartId: cart.id },
+            include: [{ model: Product, attributes: ['name'] }]
         });
 
         const result = cartItems.map(item => ({
             id: item.id,
             productId: item.productId,
-            productName: item.product ? item.Product.name : 'Unknown Product'
+            productName: item.Product ? item.Product.name : 'Unknown Product'
         }));
 
-        console.log(result)
         res.json(result);
     } catch (error) {
         console.error('Cart fetch error:', error);
         res.status(500).json({ error: 'Failed to fetch cart' });
     }
 });
-
 
 module.exports = router;
