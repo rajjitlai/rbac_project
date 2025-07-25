@@ -129,4 +129,65 @@ router.post('/assign-permission', async (req, res) => {
     }
 });
 
+// extra fetch endpoints for admin panel
+/**
+ * @swagger
+ * /roles:
+ *   get:
+ *     summary: Fetch roles
+ *     tags: [RBAC]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Roles fetched
+ */
+
+router.get('/roles', async (req, res) => {
+    try {
+        const roles = await Role.findAll();
+        res.json(roles)
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch roles', error: error.message });
+    }
+})
+
+/**
+ * @swagger
+ * /permissions:
+ *   get:
+ *     summary: Fetch permissions
+ *     tags: [RBAC]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Permission fetched
+ */
+
+router.get('/permissions', async (req, res) => {
+    try {
+        const roles = await Permission.findAll();
+        res.json(roles)
+    } catch (error) {
+        res.status(500).json({
+            message: 'Failed to fetch permission',
+            error: error.message
+        });
+    }
+})
 module.exports = router;
