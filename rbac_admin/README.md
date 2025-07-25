@@ -1,74 +1,84 @@
-# UI for Dynamic RBAC System with Multi-App Integration
+# 🖥️ UI for Dynamic RBAC System with Multi-App Integration
 
-## Project Overview
+## 📘 Overview
 
-This repository contains the frontend user interface (UI) for the **Dynamic Role-Based Access Control (RBAC) System with Multi-App Integration**, developed as part of a 4-day (96-hour) interview task. The UI supports two mini-applications:
+This project is the **frontend user interface** for a Dynamic Role-Based Access Control (RBAC) System supporting two mini-applications:
 
-- **Shopping App**: Features for browsing products, adding to cart, and checkout.
-- **Todo App**: Features for creating, reading, updating, and deleting todo items.
+* 🛒 **Shopping App**: Browse products, manage cart, perform checkout
+* ✅ **Todo App**: Create, view, update, and delete todo items
 
-The UI is built using **React.js** with **Tailwind CSS** for styling, managed via **Vite** for a fast development experience. It integrates seamlessly with the backend RBAC system to enforce authentication and permission-based access.
+Built with **React.js**, styled using **Tailwind CSS**, and scaffolded with **Vite**, the UI integrates tightly with the backend API to provide **authentication** and **permission-based interface control**.
 
-## Technology Stack
+---
 
-- **Framework**: React.js
-- **Styling**: Tailwind CSS
-- **Build Tool**: Vite
-- **Integration**: Fetches data from a Node.js backend with Sequelize and SQLite
+## 🧱 Technology Stack
 
-## Features Implemented
+| Category    | Tech Used                              |
+| ----------- | -------------------------------------- |
+| Framework   | React.js                               |
+| Styling     | Tailwind CSS                           |
+| Build Tool  | Vite                                   |
+| API Backend | Node.js + Express (Sequelize + SQLite) |
 
-### Shopping App UI
+---
 
-- Product selection dropdown to add items to the cart
-- Create new product functionality
-- Cart display with added items
-- Checkout button with confirmation
+## 🚀 Features
 
-### Todo App UI
+### 🛒 Shopping App UI
 
-- Form to create new todo items
-- List view to read existing todos
-- Edit and delete options for individual todos
+* Product selector for adding to cart
+* Product creation interface
+* Cart display with dynamic updates
+* Checkout button with confirmation
 
-### General UI Features
+### ✅ Todo App UI
 
-- Responsive design using Tailwind CSS
-- Real-time updates via API calls
-- Authentication integration (login/register forms)
-- Permission-based visibility (e.g., restricted buttons for unauthorized actions)
+* Form for creating todos
+* List of existing todos
+* Edit and delete functionality
 
-## Project Structure
+### 🔐 General Features
+
+* Fully responsive layout
+* Real-time data via API
+* Login and registration forms
+* UI-level visibility control based on permissions (e.g., hide buttons for unauthorized users)
+
+---
+
+## 📁 Project Structure
 
 ```
 rbac_admin/
-|- src/
-  |- components/        # Reusable React components (e.g., Shopping, Todo)
-  |- pages/             # Page-level components
-  |- assets/            # Static assets (images, etc.)
-  |- App.jsx            # Main app component
-  |- main.jsx           # Vite entry point
-|- public/              # Public assets
-|- index.html           # HTML template
-|- vite.config.js       # Vite configuration
-|- tailwind.config.js  # Tailwind CSS configuration
-|- package.json         # Project dependencies and scripts
+├── src/
+│   ├── components/      # Reusable UI components
+│   ├── pages/           # Route-level views
+│   ├── assets/          # Static content
+│   ├── App.jsx          # Root component
+│   └── main.jsx         # Vite entry
+├── public/              # Public assets
+├── index.html           # Main HTML template
+├── vite.config.js       # Vite build configuration
+├── tailwind.config.js   # Tailwind theme setup
+└── package.json         # Dependencies and scripts
 ```
 
-## Setup Instructions
+---
 
-### Prerequisites
+## ⚙️ Setup Instructions
 
-- Node.js (v14.x or later)
-- npm or yarn
+### 📦 Prerequisites
 
-### Installation
+* Node.js (v14.x or newer)
+* npm or yarn
+
+### 💻 Local Development
 
 1. **Clone the Repository**
 
    ```bash
    git clone https://github.com/rajjitlai/rbac_project
-   cd rbac
+   cd rbac_admin
    ```
 
 2. **Install Dependencies**
@@ -77,53 +87,69 @@ rbac_admin/
    npm install
    ```
 
-3. **Configure Environment**
-   - Ensure the backend is running (see backend README for setup).
-   - Update `src/config.js` (if exists) with the backend URL (e.g., `http://localhost:3000`).
+3. **Configure Backend URL**
 
-4. **Run the Development Server**
+   Ensure the backend server is running. Then, update `src/config.js` (if present):
+
+   ```js
+   export const API_BASE_URL = "http://localhost:3000";
+   ```
+
+4. **Run the Dev Server**
 
    ```bash
    npm run dev
    ```
 
-   Open `http://localhost:5173` in your browser to view the app.
+   Open [`http://localhost:5173`](http://localhost:5173) in your browser.
 
-### Build for Production
+---
 
-1. Build the optimized production bundle:
+## 🏗️ Build & Deploy
 
-   ```bash
-   npm run build
-   ```
+### 🛠 Build for Production
 
-2. Serve the build output (e.g., using a static server like `serve`):
+```bash
+npm run build
+```
 
-   ```bash
-   npm install -g serve
-   serve -s dist
-   ```
+### 🌐 Serve the Build
 
-## Integration with Backend
+```bash
+npm install -g serve
+serve -s dist
+```
 
-- The UI communicates with the backend API endpoints (e.g., `/products`, `/todos`) using `apiService` calls.
-- JWT tokens are stored and sent with requests for authenticated actions.
-- Permission checks are enforced via backend middleware, reflected in UI state.
+### ☁️ Deployment Notes
 
-## Testing
+* Host the `/dist` folder using platforms like **Netlify**, **Vercel**, or **GitHub Pages**
+* Ensure CORS is enabled and the backend API is accessible at runtime
 
-- Manually test UI components by interacting with the Shopping and Todo apps.
-- Use the browser's developer tools to inspect network requests and verify API responses.
+---
 
-## Deployment
+## 🔄 Backend Integration
 
-- Deploy the `dist` folder (generated by `npm run build`) to a static hosting service (e.g., Netlify, Vercel).
-- Ensure the backend API is accessible via the configured URL.
+* Interacts with RBAC backend endpoints (`/login`, `/products`, `/todos`, etc.)
+* Uses JWT for authorization headers
+* UI elements are conditionally rendered based on role/permission feedback from backend
 
-## Contributors
+---
 
-- [Rajjit Laishram](https://github.com/rajjitlai)
+## 🧪 Testing
 
-## License
+* Manual testing through the browser UI
+* Use browser dev tools to inspect API requests and test RBAC enforcement
+* Ensure unauthorized elements (e.g., admin-only buttons) are hidden as expected
 
-MIT License
+---
+
+## 👥 Contributors
+
+* [Rajjit Laishram](https://github.com/rajjitlai)
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
