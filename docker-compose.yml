@@ -8,6 +8,23 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/app
+      - db_data:/app/db
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
+      - PORT=3000
+      - JWT_SECRET=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
+    command: node app.js
+
+  frontend:
+    build:
+      context: ./rbac_admin
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:3000
+
+volumes:
+  db_data:
