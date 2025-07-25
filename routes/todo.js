@@ -1,6 +1,7 @@
 const express = require('express');
 const authMiddleware = require('../middleware/auth');
 const rbacMiddleware = require('../middleware/rbac');
+const Todo = require('../models/Todo');
 const router = express.Router();
 
 
@@ -35,8 +36,13 @@ const router = express.Router();
  *               example:
  *                 message: Todo created
  */
-router.post('/todos', authMiddleware, rbacMiddleware('todo:create'), (req, res) => {
-    res.json({ message: 'Todo created' });
+router.post('/todos', authMiddleware, rbacMiddleware('todo:create'), async (req, res) => {    
+    const { title } = req.body
+    const todo = await Todo.create({
+        title,
+        UserId: req.user.id
+    })
+    res.json({ message: 'Todo created' }, todo);
 });
 
 /**
@@ -57,10 +63,10 @@ router.post('/todos', authMiddleware, rbacMiddleware('todo:create'), (req, res) 
  *               example:
  *                 message: List of todos
  */
-router.get('/todos', authMiddleware, rbacMiddleware('todo:read'), (req, res) => {
-    res.json({ message: 'List of todos' });
+router.get('/todos', authMiddleware, rbacMiddleware('todo:read'), async (req, res) => {
+    const todos = await Todo.findAll()
+    res.json(todos);
 });
-
 
 /**
  * @swagger
@@ -101,9 +107,25 @@ router.get('/todos', authMiddleware, rbacMiddleware('todo:read'), (req, res) => 
  *               example:
  *                 message: Todo 1 updated
  */
-router.put('/todos/:id', authMiddleware, rbacMiddleware('todo:update'), (req, res) => {
-    res.json({ message: `Todo ${req.params.id} updated` });
-});
+router.put('/todos/:id', authMiddleware, rbacMiddleware('todo:update'), async (req, res) => {
+    try {
+        const { id } = req.params
+        const { title } = req.body
+        const todo = await Todo.findOne({ where: { id, UserId: req.user.id } });
+        if (!todo) {
+            return res.status(404).json({ error: 'Todo not found or not authorized' });
+        }
+
+        todo.title = title;
+        await todo.save();
+
+        res.json({ message: `Todo ${id} updated`, todo });
+    } catch (error) {
+        console.error('Update error:', error);
+        res.status(500).json({ error: 'Failed to update todo' });
+    }
+}
+);
 
 /**
  * @swagger
@@ -131,8 +153,26 @@ router.put('/todos/:id', authMiddleware, rbacMiddleware('todo:update'), (req, re
  *               example:
  *                 message: Todo 1 deleted
  */
-router.delete('/todos/:id', authMiddleware, rbacMiddleware('todo:delete'), (req, res) => {
-    res.json({ message: `Todo ${req.params.id} deleted` });
+router.delete('/todos/:id', authMiddleware, rbacMiddleware('todo:delete'), async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const todo = await Todo.findOne({
+            where: { id, UserId: req.user.id }
+        });
+
+        if (!todo) {
+            return res.status(404).json({ error: 'Todo not found or not authorized' });
+        }
+
+        await todo.destroy();
+
+        res.json({ message: `Todo ${id} deleted successfully` });
+    } catch (error) {
+        console.error('Delete error:', error);
+        res.status(500).json({ error: 'Failed to delete todo' });
+    }
 });
+
 
 module.exports = router;

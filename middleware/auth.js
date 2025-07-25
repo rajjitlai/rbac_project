@@ -11,7 +11,7 @@ const authMiddleware = async (req, res, next) => {
             include: [{ model: Role, include: [Permission] }],
         });
         if (!user) return res.status(404).json({ error: 'User not found' });
-        req.user = user;
+        req.user = { id: user.id };
         next();
     } catch (error) {
         res.status(401).json({ error: 'Invalid token' });
